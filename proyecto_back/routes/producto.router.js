@@ -8,4 +8,4 @@ router.get("/:id", productoController.findOne)
 router.put("/:id", productoController.update)
 router.delete("/:id", productoController.remove)
 
-module.exports = router
+module.exports = router;
