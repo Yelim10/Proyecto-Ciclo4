@@ -15,7 +15,7 @@ exports.create = function(req,res){
 
     empleado.save(function(err){
         if(err){
-            console.error(err),
+            console.log=false,
             response.exito = false,
             response.msg = "Error al guardar empleado"
             res.json(response)

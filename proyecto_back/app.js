@@ -3,13 +3,14 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-var database = require("./config/database")
-var auth = require("./auth/main_auth")
+var database = require('./config/database');
+var auth = require('./auth/main_auth')
+var cors = require('cors');
 
-var usuariosRouter = require('/routes/empleados.router')
+
 var empleadosRouter = require('./routes/empleados.router')
 var productoRouter = require('./routes/producto.router')
-
+var usuariosRouter = require('./routes/usuario.router')
 
 var app = express();
 
@@ -18,15 +19,18 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(cors());
 
 //mongo connection
 database.mongoConect();
+app.use('/usuarios', usuariosRouter);
+
 app.use(auth);
 
 
 app.use('/empleados', empleadosRouter);
 app.use('/producto', productoRouter);
-app.use('/usuarios', usuariosRouter);
+
 
 
 // catch 404 and forward to error handler
